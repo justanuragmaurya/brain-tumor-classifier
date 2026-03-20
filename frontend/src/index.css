@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-xray-bg: #06060c;
+  --color-xray-surface: #0d0d14;
+  --color-xray-surface-2: #13131c;
+  --color-xray-border: #1a1a26;
+  --color-xray-border-hi: #2a2a3a;
+  --color-xray-cyan: #00d4ff;
+  --color-xray-cyan-dim: #00d4ff33;
+  --color-xray-text: #b0b8c8;
+  --color-xray-text-dim: #5a6070;
+  --color-xray-red: #ff3b3b;
+  --color-xray-amber: #ff9f1c;
+  --color-xray-green: #00e5a0;
+  --color-xray-blue: #4a9eff;
+}
+
+body {
+  background: var(--color-xray-bg);
+  color: var(--color-xray-text);
+  font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── spinner ── */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 212, 255, 0.2);
+  border-top-color: var(--color-xray-cyan);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* ── scan-line sweep on upload hover ── */
+@keyframes scanline {
+  0%   { top: -2px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: calc(100% + 2px); opacity: 0; }
+}
+.upload-zone:hover .scanline {
+  animation: scanline 1.8s ease-in-out infinite;
+}
+
+/* ── fade-slide-up entrance ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.4s ease-out both;
+}
+
+/* ── staggered children ── */
+.stagger > :nth-child(1) { animation-delay: 0ms; }
+.stagger > :nth-child(2) { animation-delay: 80ms; }
+.stagger > :nth-child(3) { animation-delay: 160ms; }
+.stagger > :nth-child(4) { animation-delay: 240ms; }
+.stagger > :nth-child(5) { animation-delay: 320ms; }
+
+/* ── pulse glow for classify button ── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0.4); }
+  50%      { box-shadow: 0 0 20px 4px rgba(0, 212, 255, 0.15); }
+}
+.btn-glow:not(:disabled) {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}
+.btn-glow:not(:disabled):hover {
+  animation: none;
+  box-shadow: 0 0 24px 6px rgba(0, 212, 255, 0.2);
+}
+
+/* ── bar shimmer ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.bar-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* ── confidence counter ── */
+@keyframes countUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-count {
+  animation: countUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+}
