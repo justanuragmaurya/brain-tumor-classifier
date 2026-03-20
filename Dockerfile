@@ -17,6 +17,7 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 
 
 WORKDIR /app
 COPY backend/app.py backend/config.py ./backend/
+COPY backend/samples/ ./backend/samples/
 COPY model/ ./model/
 
 COPY --from=frontend-build /build/dist /usr/share/nginx/html

@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_URL } from "./config";
 import UploadZone from "./components/UploadZone";
 import ResultsPanel from "./components/ResultsPanel";
+import SamplePicker from "./components/SamplePicker";
 
 export default function App() {
   const [file, setFile] = useState(null);
@@ -62,12 +63,19 @@ export default function App() {
           {result ? (
             <ResultsPanel result={result} onReset={handleReset} />
           ) : (
-            <UploadZone
-              file={file}
-              onFileSelect={setFile}
-              loading={loading}
-              onClassify={handleClassify}
-            />
+            <>
+              <UploadZone
+                file={file}
+                onFileSelect={setFile}
+                loading={loading}
+                onClassify={handleClassify}
+              />
+              {!file && !loading && (
+                <div className="mt-5">
+                  <SamplePicker onSampleSelect={setFile} />
+                </div>
+              )}
+            </>
           )}
         </div>
 

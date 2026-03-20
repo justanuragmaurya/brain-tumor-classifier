@@ -7,6 +7,7 @@ RUN pip install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu 
     && pip install --no-cache-dir flask flask-cors Pillow numpy
 
 COPY backend/app.py backend/config.py ./backend/
+COPY backend/samples/ ./backend/samples/
 COPY model/ ./model/
 
 WORKDIR /app/backend

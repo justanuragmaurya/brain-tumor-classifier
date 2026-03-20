@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/predict': 'http://localhost:8080',
+      '/samples': 'http://localhost:8080',
     },
   },
 })

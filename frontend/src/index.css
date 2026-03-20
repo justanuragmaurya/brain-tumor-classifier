@@ -94,3 +94,15 @@ body {
 .animate-count {
   animation: countUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
 }
+
+/* ── sample thumbnails ── */
+.sample-thumb {
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+  border-color: var(--color-xray-border);
+}
+.sample-thumb:hover {
+  border-color: var(--thumb-color, var(--color-xray-cyan));
+  box-shadow: 0 0 10px color-mix(in srgb, var(--thumb-color, var(--color-xray-cyan)) 25%, transparent);
+}

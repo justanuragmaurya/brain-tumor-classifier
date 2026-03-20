@@ -3,10 +3,12 @@ import json
 import torch
 import torch.nn as nn
 from torchvision import transforms
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from PIL import Image
 from config import PORT, HOST, MODEL_DIR, DEBUG
+
+SAMPLES_DIR = os.path.join(os.path.dirname(__file__), "samples")
 
 
 class BrainTumorCNN(nn.Module):
@@ -103,6 +105,30 @@ def predict():
         })
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/samples", methods=["GET"])
+def list_samples():
+    result = {}
+    for cls in class_names:
+        cls_dir = os.path.join(SAMPLES_DIR, cls)
+        if not os.path.isdir(cls_dir):
+            result[cls] = []
+            continue
+        files = sorted(
+            f for f in os.listdir(cls_dir)
+            if f.lower().endswith((".jpg", ".jpeg", ".png"))
+        )
+        result[cls] = files
+    return jsonify(result)
+
+
+@app.route("/samples/<class_name>/<filename>", methods=["GET"])
+def serve_sample(class_name, filename):
+    if class_name not in class_names:
+        return jsonify({"error": "Invalid class"}), 404
+    cls_dir = os.path.join(SAMPLES_DIR, class_name)
+    return send_from_directory(cls_dir, filename)
 
 
 if __name__ == "__main__":
