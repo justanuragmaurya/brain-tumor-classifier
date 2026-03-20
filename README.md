@@ -1,3 +1,12 @@
+---
+title: Brain Tumor CNN
+emoji: 🧠
+colorFrom: gray
+colorTo: blue
+sdk: docker
+pinned: false
+---
+
 # Brain Tumor MRI Classifier
 
 A web app that classifies brain MRI scans into four categories — **glioma**, **meningioma**, **no tumor**, and **pituitary** — using a custom CNN built with PyTorch.
